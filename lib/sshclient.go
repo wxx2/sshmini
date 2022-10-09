@@ -7,21 +7,21 @@ import (
 )
 
 type SshInfo struct {
-	address  string
-	username string
-	password string
+	Address  string
+	Username string
+	Password string
 }
 
 func NewTerminal(sshinfo SshInfo) {
 	// 设置配置信息
 	config := ssh.ClientConfig{
-		User:            sshinfo.username,
-		Auth:            []ssh.AuthMethod{ssh.Password(sshinfo.password)},
+		User:            sshinfo.Username,
+		Auth:            []ssh.AuthMethod{ssh.Password(sshinfo.Password)},
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
 
 	// 与服务器建立连接
-	clinet, err := ssh.Dial("tcp", sshinfo.address, &config)
+	clinet, err := ssh.Dial("tcp", sshinfo.Address, &config)
 	if err != nil {
 		log.Fatal("SSH dial error: %s", err.Error())
 	}
